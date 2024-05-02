@@ -6,6 +6,16 @@ function hentAlt(){
     $.get("/hentAlt", function (){
     })
 }
+function validerForavn(fornavn) {
+    let regx = /[a-zæøåA-ZÆØÅ. -]{2,50}$/;
+    if (regx.test(fornavn)) {
+        $("#feil3").html("")
+        return true;
+    } else {
+        $("#feil3").html("Fornavn feltet er påkrevet")
+        return false;
+    }
+}
 
 //Mobilnummer validation
 function valMobilnummer(mobilnummer){
@@ -54,10 +64,11 @@ $(document).ready(function() {
         } else {
             $("#feil2").html("")
         }
-        if (fornavn === "") {
+        if (!validerForavn(fornavn)) {
             validTicket = false;
             let feil3 = $("#feil3");
             feil3.html("Fornavn feltet er påkrevet");
+
         }
         else {
             $("#feil3").html("");
